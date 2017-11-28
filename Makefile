@@ -1,22 +1,22 @@
 ##
 ## EPITECH PROJECT, 2017
-## Makefile
+## makefile
 ## File description:
-## Makefile project
+## makefile
 ##
 
 CC	=	gcc
 
-CFLAGS	=	-Wall -Wextra -W -Werror -pedantic -I include/
+CFLAGS	=	-Wall -Wextra -W -Werror -I include/
 
 LIB	=	-L lib/my -lmy
 LIB	+=	-L lib/printf -lprintf
 
-SRC	=	sources.c
+SRC	=	my_ls.c
 
 OBJ	=	$(SRC:.c=.o)
 
-NAME	=	nom_de_l_executable
+NAME	=	my_ls
 
 all: $(NAME)
 
@@ -27,7 +27,6 @@ $(NAME): $(OBJ)
 	rm -f $(OBJ)
 	make clean -C ./lib/my/
 	make clean -C ./lib/printf/
-
 clean:
 	rm -f $(OBJ)
 	make clean -C ./lib/my/

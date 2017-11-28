@@ -7,7 +7,7 @@
 
 #ifndef _MY_H_
 # define _MY_H_
-
+int	my_printf(char *str, ...);
 void my_putchar(char c);
 int my_isneg(int nb);
 int my_put_nbr(int nb);

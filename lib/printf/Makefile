@@ -10,7 +10,6 @@ CC	=	gcc
 CFLAGS	=	-W -Wall -Werror -Wextra -I ../../include/
 
 SRC 	=	my_printf.c					\
-		flags/flags.c					\
 		specifiers/specifiers_defaults.c		\
 		specifiers/specifiers_length_l.c		\
 		specifiers/specifiers_length_h.c		\

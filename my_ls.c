@@ -65,9 +65,9 @@ void my_type(struct stat sb)
 	my_type_2(sb);
 }
 
-void my_display(struct stat sb, char *av[])
+void flag_l(struct stat sb, char *av[])
 {
-	my_printf("Name: %s\n", my_find_name(av[1]));
+	my_printf("Name: %s\n", my_find_name(av[2]));
 	my_printf("Type: ");
 	my_type(sb);
 	my_printf("Inode: %ld\n", (long long int)sb.st_ino);
@@ -80,18 +80,49 @@ void my_display(struct stat sb, char *av[])
 	my_printf("GID: %ld\n", (long)sb.st_gid);
 }
 
-int main(int ac, char *av[])
+int without_flag(DIR *dir, struct dirent *file)
 {
+	dir = opendir(".");
+	if (dir == NULL)
+		return (84);
+	while ((file = readdir(dir)) != NULL) {
+		if (file->d_name[0] != '.')
+			my_printf("%s\n", file->d_name);
+	}
+	closedir(dir);
+	return (0);
+}
+
+int flag_a(DIR *dir, struct dirent *file)
+{
+	dir = opendir(".");
+	if (dir == NULL)
+		return (84);
+	while ((file = readdir(dir)) != NULL) {
+			my_printf("%s\n", file->d_name);
+	}
+	closedir(dir);
+	return (0);
+}
+
+int main(int ac, char **av)
+{
+	DIR *dir = NULL;
+	struct dirent *file = NULL;
+	char *str = malloc(sizeof(char *) * ac);
 	struct stat sb;
 
-	if (ac != 2) {
-		my_printf("Usage: %s <pathname>\n", av[0]);
-		return (84);
-	}
-	if (stat(av[1], &sb) == -1) {
-		perror("stat");
+	if (stat(av[0], &sb) == -1) {
+		perror("ls");
 		return (0);
 	}
-	my_display(sb, av);
-	return (0);
+	if (str == NULL)
+		return (84);
+	if (ac == 1 || av[1][0] == '.')
+		without_flag(dir, file);
+	else if (av[1][0] == '-' && av[1][1] == 'a')
+		flag_a(dir, file);
+	else if (av[1][0] == '-' && av[1][1] == 'l')
+		flag_l(sb, av);
+	return 0;
 }
