@@ -12,7 +12,8 @@ CFLAGS	=	-Wall -Wextra -W -Werror -I include/
 LIB	=	-L lib/my -lmy
 LIB	+=	-L lib/printf -lprintf
 
-SRC	=	my_ls.c
+SRC	=	my_ls.c		\
+		my_ls_l.c
 
 OBJ	=	$(SRC:.c=.o)
 
