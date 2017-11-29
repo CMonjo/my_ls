@@ -17,6 +17,23 @@
 #include "printf.h"
 #include "my_ls.h"
 
+char *my_find_name(char *str)
+{
+	char* tmp = malloc(sizeof(char) * my_strlen(str));
+	int i = 0;
+
+	if (tmp == NULL)
+		exit (84);
+	my_revstr(str);
+	while (str[i] != '/') {
+		tmp[i] = str[i];
+		i++;
+	}
+	my_revstr(tmp);
+	free(tmp);
+	return (tmp);
+}
+
 int without_flag(DIR *dir, struct dirent *file)
 {
 	dir = opendir(".");
@@ -39,32 +56,6 @@ int flag_a(DIR *dir, struct dirent *file)
 		my_printf("%s\n", file->d_name);
 	}
 	closedir(dir);
-	return (0);
-}
-
-int my_right(struct stat sb, char *mytime)
-{
-	struct passwd *name;
-	struct group *group;
-
-	name = getpwuid(sb.st_uid);
-	group = getgrgid(sb.st_gid);
-	my_type(sb);
-	my_printf((sb.st_mode & S_IRUSR) ? "r" : "-");
-	my_printf((sb.st_mode & S_IWUSR) ? "w" : "-");
-	my_printf((sb.st_mode & S_IXUSR) ? "x" :  "-");
-	my_printf((sb.st_mode & S_IRGRP) ? "r" : "-");
-	my_printf((sb.st_mode & S_IWGRP) ? "w" : "-");
-	my_printf((sb.st_mode & S_IXGRP) ? "x" : "-");
-	my_printf((sb.st_mode & S_IROTH) ? "r" : "-");
-	my_printf((sb.st_mode & S_IWOTH) ? "w" : "-");
-	my_printf((sb.st_mode & S_IXOTH) ? "x" : "-");
-	my_printf(" %d", (int)sb.st_nlink);
-	my_printf(" %s", name->pw_name);
-	my_printf(" %s", group->gr_name);
-	my_printf(" %lld", sb.st_size);
-	my_time(mytime, sb);
-	my_printf(" %s", mytime);
 	return (0);
 }
 
@@ -92,7 +83,7 @@ int flag_l(DIR *dir, struct dirent *file, char *av[])
 
 int flag_r(DIR *dir, struct dirent *file)
 {
-	my_printf("slt\n");
+	my_printf("test\n");
 	dir = opendir(".");
 	if (dir == NULL)
 		return (84);

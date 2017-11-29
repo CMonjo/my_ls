@@ -10,8 +10,8 @@
 	char *my_find_name(char *str);
 	void my_type_2(struct stat sb);
 	void my_type(struct stat sb);
-	void my_time(char *mytime, struct stat sb);
-	int my_right(struct stat sb, char *mytime);
+	char *my_time(char *mytime, struct stat sb);
+	void my_right(struct stat sb, char *mytime);
 	int flag_l(DIR *dir, struct dirent *file, char *av[]);
 	int without_flag(DIR *dir, struct dirent *file);
 	int flag_a(DIR *dir, struct dirent *file);

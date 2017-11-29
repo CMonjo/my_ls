@@ -17,23 +17,6 @@
 #include "printf.h"
 #include "my_ls.h"
 
-char *my_find_name(char *str)
-{
-	char* tmp = malloc(sizeof(char) * my_strlen(str));
-	int i = 0;
-
-	if (tmp == NULL)
-		exit (84);
-	my_revstr(str);
-	while (str[i] != '/') {
-		tmp[i] = str[i];
-		i++;
-	}
-	my_revstr(tmp);
-	free(tmp);
-	return (tmp);
-}
-
 void my_type_2(struct stat sb)
 {
 	switch (sb.st_mode & S_IFMT) {
@@ -68,7 +51,7 @@ void my_type(struct stat sb)
 	my_type_2(sb);
 }
 
-void my_time(char *mytime, struct stat sb)
+char *my_time(char *mytime, struct stat sb)
 {
 	mytime[0] = ctime(&sb.st_mtime)[4] + 32;
 	mytime[1] = ctime(&sb.st_mtime)[5];
@@ -84,4 +67,29 @@ void my_time(char *mytime, struct stat sb)
 	mytime[11] = ctime(&sb.st_mtime)[14];
 	mytime[12] = ctime(&sb.st_mtime)[15];
 	mytime[13] = '\0';
+	return (mytime);
+}
+
+void my_right(struct stat sb, char *mytime)
+{
+	struct passwd *name;
+	struct group *group;
+
+	name = getpwuid(sb.st_uid);
+	group = getgrgid(sb.st_gid);
+	my_type(sb);
+	my_printf((sb.st_mode & S_IRUSR) ? "r" : "-");
+	my_printf((sb.st_mode & S_IWUSR) ? "w" : "-");
+	my_printf((sb.st_mode & S_IXUSR) ? "x" :  "-");
+	my_printf((sb.st_mode & S_IRGRP) ? "r" : "-");
+	my_printf((sb.st_mode & S_IWGRP) ? "w" : "-");
+	my_printf((sb.st_mode & S_IXGRP) ? "x" : "-");
+	my_printf((sb.st_mode & S_IROTH) ? "r" : "-");
+	my_printf((sb.st_mode & S_IWOTH) ? "w" : "-");
+	my_printf((sb.st_mode & S_IXOTH) ? "x" : "-");
+	my_printf(" %d", (int)sb.st_nlink);
+	my_printf(" %s", name->pw_name);
+	my_printf(" %s", group->gr_name);
+	my_printf(" %lld", sb.st_size);
+	my_printf(" %s", my_time(mytime, sb));
 }
