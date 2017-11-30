@@ -39,7 +39,6 @@ void which_flag(char **av, char *my_path)
 	// DIR *dir = NULL;
 	// struct dirent *file = NULL;
 
-	printf("my_path : %s\n", my_path);
 	// int a = 0;
 	// int l = 0;
 	// int r = 0;
@@ -59,12 +58,56 @@ void which_flag(char **av, char *my_path)
 
 int main(int ac, char **av)
 {
-	char *my_path = malloc(sizeof(char *) * ac * 3);
+	char *my_path = malloc(sizeof(char) * ac * 3);
+	char *my_flags = malloc(sizeof(char) * 100);
 	int nbr_path = 0;
 	int count = 1;
-
-	if (my_path == NULL)
+	int i = 0;
+	if (my_path == NULL || my_flags == NULL)
 		return (84);
+
+
+
+
+
+
+
+
+
+
+
+
+
+	my_flags = "0000";
+	while (av[i] != '\0') {
+		if (av[i][0] == '-')
+			my_flags = ls_flags(av[i], &*my_flags);
+		i++;
+	}
+	printf("my_flags = %s\n", my_flags);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	if (ac == 1) {
 		my_path = ".";
 		without_flag(my_path);
@@ -72,12 +115,13 @@ int main(int ac, char **av)
 	else if (ac == 2 && av[1][0] != '-') {
 		my_path = av[1];
 		without_flag(my_path);
-	} else {
-		//FAIRE PAREIL AVEC LES - POUR LES FLAGS
+	}
+	else {
+
 		nbr_path = nbr_of_path(av, nbr_path);
 		while (nbr_path > 0) {
 			my_path = paths(av, &count);
-			//printf("%s:\n", my_path);
+			printf("%s:\n", my_path);
 			which_flag(av, my_path);
 			nbr_path--;
 		}

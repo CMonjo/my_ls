@@ -12,10 +12,10 @@ CFLAGS	=	-Wall -Wextra -W -Werror -I include/
 LIB	=	-L lib/my -lmy
 LIB	+=	-L lib/printf -lprintf
 
-SRC	=	my_ls.c		\
-		fts_flag_l.c	\
-		flags.c		\
-		path_and_flag.c
+SRC	=	src/my_ls.c		\
+		src/fts_flag_l.c	\
+		src/flags.c		\
+		src/path_and_flag.c
 
 OBJ	=	$(SRC:.c=.o)
 

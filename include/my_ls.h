@@ -15,7 +15,10 @@
 	int flag_l(char *my_path);
 	int flag_r(char *my_path);
 	int without_flag(char *my_path);
+	void which_flag(char **av, char *my_path);
+	char *ls_flags(char *av, char *my_flags);
 	int nbr_of_path(char **av, int count);
+	int nbr_of_flags(char **av, int count);
 	char *paths(char **av, int *count);
 	int flag_a(char *my_path);
 #endif
