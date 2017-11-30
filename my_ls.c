@@ -34,82 +34,53 @@ char *my_find_name(char *str)
 	return (tmp);
 }
 
-int without_flag(DIR *dir, struct dirent *file)
+void which_flag(char **av, char *my_path)
 {
-	dir = opendir(".");
-	if (dir == NULL)
-		return (84);
-	while ((file = readdir(dir)) != NULL) {
-		if (file->d_name[0] != '.')
-			my_printf("%s\n", file->d_name);
-	}
-	closedir(dir);
-	return (0);
-}
+	// DIR *dir = NULL;
+	// struct dirent *file = NULL;
 
-int flag_a(DIR *dir, struct dirent *file)
-{
-	dir = opendir(".");
-	if (dir == NULL)
-		return (84);
-	while ((file = readdir(dir)) != NULL) {
-		my_printf("%s\n", file->d_name);
-	}
-	closedir(dir);
-	return (0);
-}
+	printf("my_path : %s\n", my_path);
+	// int a = 0;
+	// int l = 0;
+	// int r = 0;
+	// int R = 0;
+	// int d = 0;
 
-int flag_l(DIR *dir, struct dirent *file, char *av[])
-{
-	struct stat sb;
-	char *mytime = malloc(sizeof(char) * 14);
-
-	if (mytime == NULL)
-		return (84);
-	dir = opendir(av[2]);
-	if (dir == NULL)
-		return (84);
-	my_printf("total %d\n", sb.st_blksize * 2);
-	while ((file = readdir(dir)) != NULL) {
-		if (file->d_name[0] != '.') {
-			stat(file->d_name, &sb);
-			my_right(sb, mytime);
-			my_printf(" %s\n", file->d_name);
-		}
+	if (av[1][0] == '-' && av[1][1] == 'a') {
+		flag_a(my_path);
 	}
-	closedir(dir);
-	return (0);
-}
-
-int flag_r(DIR *dir, struct dirent *file)
-{
-	my_printf("test\n");
-	dir = opendir(".");
-	if (dir == NULL)
-		return (84);
-	while ((file = readdir(dir)) != NULL) {
-		my_printf("%s\n", file->d_name);
+	else if (av[1][0] == '-' && av[1][1] == 'l') {
+		flag_l(my_path);
 	}
-	closedir(dir);
-	return (0);
+	else if (av[1][0] == '-' && av[1][1] == 'r') {
+		flag_r(my_path);
+	}
 }
 
 int main(int ac, char **av)
 {
-	DIR *dir = NULL;
-	struct dirent *file = NULL;
-	char *str = malloc(sizeof(char *) * ac);
+	char *my_path = malloc(sizeof(char *) * ac * 3);
+	int nbr_path = 0;
+	int count = 1;
 
-	if (str == NULL)
+	if (my_path == NULL)
 		return (84);
-	if (ac == 1 || av[1][0] == '.')
-		without_flag(dir, file);
-	else if (av[1][0] == '-' && av[1][1] == 'a')
-		flag_a(dir, file);
-	else if (av[1][0] == '-' && av[1][1] == 'l')
-		flag_l(dir, file, av);
-	else if (av[1][0] == '-' && av[1][1] == 'r')
-		flag_r(dir, file);
-
-	return 0;
+	if (ac == 1) {
+		my_path = ".";
+		without_flag(my_path);
+	}
+	else if (ac == 2 && av[1][0] != '-') {
+		my_path = av[1];
+		without_flag(my_path);
+	} else {
+		//FAIRE PAREIL AVEC LES - POUR LES FLAGS
+		nbr_path = nbr_of_path(av, nbr_path);
+		while (nbr_path > 0) {
+			my_path = paths(av, &count);
+			//printf("%s:\n", my_path);
+			which_flag(av, my_path);
+			nbr_path--;
+		}
+	}
+	return (0);
 }

@@ -80,7 +80,7 @@ void my_right(struct stat sb, char *mytime)
 	my_type(sb);
 	my_printf((sb.st_mode & S_IRUSR) ? "r" : "-");
 	my_printf((sb.st_mode & S_IWUSR) ? "w" : "-");
-	my_printf((sb.st_mode & S_IXUSR) ? "x" :  "-");
+	my_printf((sb.st_mode & S_IXUSR) ? "x" : "-");
 	my_printf((sb.st_mode & S_IRGRP) ? "r" : "-");
 	my_printf((sb.st_mode & S_IWGRP) ? "w" : "-");
 	my_printf((sb.st_mode & S_IXGRP) ? "x" : "-");

@@ -13,7 +13,9 @@ LIB	=	-L lib/my -lmy
 LIB	+=	-L lib/printf -lprintf
 
 SRC	=	my_ls.c		\
-		my_ls_l.c
+		fts_flag_l.c	\
+		flags.c		\
+		path_and_flag.c
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -12,7 +12,10 @@
 	void my_type(struct stat sb);
 	char *my_time(char *mytime, struct stat sb);
 	void my_right(struct stat sb, char *mytime);
-	int flag_l(DIR *dir, struct dirent *file, char *av[]);
-	int without_flag(DIR *dir, struct dirent *file);
-	int flag_a(DIR *dir, struct dirent *file);
+	int flag_l(char *my_path);
+	int flag_r(char *my_path);
+	int without_flag(char *my_path);
+	int nbr_of_path(char **av, int count);
+	char *paths(char **av, int *count);
+	int flag_a(char *my_path);
 #endif
