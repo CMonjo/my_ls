@@ -5,16 +5,6 @@
 ** flags.c
 */
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <dirent.h>
-#include <pwd.h>
-#include <grp.h>
-#include <time.h>
-#include <stdlib.h>
-#include "my.h"
-#include "printf.h"
 #include "my_ls.h"
 
 int without_flag(char *my_path)
