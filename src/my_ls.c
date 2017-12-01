@@ -16,6 +16,7 @@
 #include "my.h"
 #include "printf.h"
 #include "my_ls.h"
+#include "struct.h"
 
 char *my_find_name(char *str)
 {
@@ -34,17 +35,10 @@ char *my_find_name(char *str)
 	return (tmp);
 }
 
-void which_flag(char **av, char *my_path)
+void which_flag(char **av, char *my_path, char *my_flag)
 {
-	// DIR *dir = NULL;
-	// struct dirent *file = NULL;
-
-	// int a = 0;
-	// int l = 0;
-	// int r = 0;
-	// int R = 0;
-	// int d = 0;
-
+	if (my_flag[1] == '0')
+		printf(" " );
 	if (av[1][0] == '-' && av[1][1] == 'a') {
 		flag_a(my_path);
 	}
@@ -56,58 +50,59 @@ void which_flag(char **av, char *my_path)
 	}
 }
 
+int calculate_path(int ac, char **av, char *my_flag)
+{
+	char *my_path = malloc(sizeof(char) * ac * 3);
+	int nbr_path = 0;
+	int nbr_flags = 0;
+	int count = 1;
+	int count_flags = 0;
+
+	if (my_path == NULL)
+		return (84);
+	nbr_path = nbr_of_path(av, nbr_path);
+	while (nbr_path > 0) {
+		my_path = paths(av, &count);
+		nbr_flags = nbr_of_flags(av, count_flags);
+		if (nbr_flags == 0) {
+			my_printf("%s:\n", my_path);
+			without_flag(my_path);
+		}
+		which_flag(av, my_path, my_flag);
+		nbr_path--;
+	}
+	return (0);
+}
+
+int calculate_flags(int ac, char **av)
+{
+	char *my_flag = malloc(sizeof(char) * 5);
+	int i = 0;
+
+	if (my_flag == NULL)
+		return (84);
+
+	my_flag[0] = '0';
+	my_flag[1] = '0';
+	my_flag[2] = '0';
+	my_flag[3] = '0';
+
+	while (av[i] != '\0') {
+		if (av[i][0] == '-')
+			my_flag = ls_flags(av[i], my_flag);
+		i++;
+	}
+	//my_printf("FLAGS l | r | R | a == %s\n", my_flag);
+	calculate_path(ac, av, my_flag);
+	return (0);
+}
+
 int main(int ac, char **av)
 {
 	char *my_path = malloc(sizeof(char) * ac * 3);
-	char *my_flags = malloc(sizeof(char) * 100);
-	int nbr_path = 0;
-	int count = 1;
-	int i = 0;
-	if (my_path == NULL || my_flags == NULL)
+
+	if (my_path == NULL)
 		return (84);
-
-
-
-
-
-
-
-
-
-
-
-
-
-	my_flags = "0000";
-	while (av[i] != '\0') {
-		if (av[i][0] == '-')
-			my_flags = ls_flags(av[i], &*my_flags);
-		i++;
-	}
-	printf("my_flags = %s\n", my_flags);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	if (ac == 1) {
 		my_path = ".";
 		without_flag(my_path);
@@ -115,16 +110,7 @@ int main(int ac, char **av)
 	else if (ac == 2 && av[1][0] != '-') {
 		my_path = av[1];
 		without_flag(my_path);
-	}
-	else {
-
-		nbr_path = nbr_of_path(av, nbr_path);
-		while (nbr_path > 0) {
-			my_path = paths(av, &count);
-			printf("%s:\n", my_path);
-			which_flag(av, my_path);
-			nbr_path--;
-		}
-	}
+	} else
+		calculate_flags(ac, av);
 	return (0);
 }

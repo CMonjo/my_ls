@@ -16,7 +16,7 @@
 #include "my.h"
 #include "printf.h"
 #include "my_ls.h"
-
+#include "struct.h"
 
 int nbr_of_path(char **av, int count)
 {
@@ -42,51 +42,28 @@ int nbr_of_flags(char **av, int count)
 	return (count);
 }
 
-
-
-
-
-
-
-
-
-
-char *ls_flags(char *av, char *my_flags)
+char *ls_flags(char *av, char *my_flag)
 {
 	int i = 1;
-
 	while (av[i] != '\0') {
 		switch (av[i]) {
 			case 'l':
-				my_flags[0] = '1';
+				my_flag[0] = '1';
 				break;
 			case 'r':
-				my_flags[1] = '1';
-				break;
-			case 'a':
-				my_flags[2] = '1';
+				my_flag[1] = '1';
 				break;
 			case 'R':
-				my_flags[3] = '1';
+				my_flag[2] = '1';
+				break;
+			case 'a':
+				my_flag[3] = '1';
 				break;
 		}
 		i++;
 	}
-	return (my_flags);
+	return (my_flag);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 char *paths(char **av, int *count)
 {

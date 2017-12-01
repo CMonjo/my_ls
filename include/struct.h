@@ -5,7 +5,12 @@
 ** .h
 */
 
-typedef struct t_list {
-	char *str;
-	struct t_list *next;
-}list_s;
+#ifndef _STRUCT_
+#define _STRUCT_
+	typedef struct flag_s {
+		int a;
+		int l;
+		int r;
+		int R;
+	}flag_t;
+#endif
