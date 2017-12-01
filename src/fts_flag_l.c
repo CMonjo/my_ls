@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2017
-** my_ls
+** Project my_ls
 ** File description:
-** .c
+** Flag l file
 */
 
 #include "my_ls.h"
 
-void my_type_2(struct stat sb)
+void my_type_of_file_second(struct stat sb)
 {
 	switch (sb.st_mode & S_IFMT) {
 		case S_IFIFO:
@@ -25,7 +25,7 @@ void my_type_2(struct stat sb)
 	}
 }
 
-void my_type(struct stat sb)
+void my_type_of_file(struct stat sb)
 {
 	switch (sb.st_mode & S_IFMT) {
 		case S_IFBLK:
@@ -38,7 +38,7 @@ void my_type(struct stat sb)
 			my_printf("d");
 			break;
 	}
-	my_type_2(sb);
+	my_type_of_file_second(sb);
 }
 
 char *my_time(char *mytime, struct stat sb)
@@ -67,7 +67,7 @@ void my_right(struct stat sb, char *mytime)
 
 	name = getpwuid(sb.st_uid);
 	group = getgrgid(sb.st_gid);
-	my_type(sb);
+	my_type_of_file(sb);
 	my_printf((sb.st_mode & S_IRUSR) ? "r" : "-");
 	my_printf((sb.st_mode & S_IWUSR) ? "w" : "-");
 	my_printf((sb.st_mode & S_IXUSR) ? "x" : "-");

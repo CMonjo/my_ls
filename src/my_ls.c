@@ -1,26 +1,25 @@
 /*
 ** EPITECH PROJECT, 2017
-** my_ls
+** Project my_ls
 ** File description:
-** .c
+** Main file
 */
 
 #include "my_ls.h"
 
-void which_flag(char **av, char *my_path, char *my_flag, int nbr_flags)
+void which_flag(char *my_path, char *my_flag, int nbr_flags)
 {
-	if (nbr_flags == 0) {
+	if (nbr_flags == 0)
 		without_flag(my_path);
-	}
-	if (my_flag[0] == '0' && my_flag[1] == '0' && my_flag[2] == '0' && my_flag[3] == '1') {
+	if (my_flag[0] == '0' && my_flag[1] == '0' && my_flag[2] == '0' &&
+	my_flag[3] == '1')
 		flag_a(my_path);
-	}
-	else if (my_flag[0] == '1' && my_flag[1] == '0' && my_flag[2] == '0' && my_flag[3] == '0') {
+	else if (my_flag[0] == '1' && my_flag[1] == '0' && my_flag[2] == '0' &&
+	my_flag[3] == '0')
 		flag_l(my_path);
-	}
-	else if (av[1][0] == '-' && av[1][1] == 'r') {
+	else if (my_flag[0] == '0' && my_flag[1] == '1' && my_flag[2] == '0' &&
+	my_flag[3] == '0')
 		flag_r(my_path);
-	}
 }
 
 //FAIRE STRUCT
@@ -39,12 +38,13 @@ int calculate_path(int ac, char **av, char *my_flag)
 	nbr_flags = nbr_of_flags(av, count_flags);
 	key = nbr_path;
 	if (nbr_path == 0)
-		which_flag(av, ".", my_flag, nbr_flags);
+		which_flag(".", my_flag, nbr_flags);
 	while (nbr_path > 0) {
 		my_path = paths(av, &count);
+		//!/AJOUTER UN \N ENTRE DEUX PATH S'IL Y A /!/
 		if (key > 1)
 			my_printf("%s:\n", my_path);
-		which_flag(av, my_path, my_flag, nbr_flags);
+		which_flag(my_path, my_flag, nbr_flags);
 		nbr_path--;
 	}
 	return (0);

@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2017
-** my_ls
+** Project my_ls
 ** File description:
-** which flags and paths.c
+** Path and flag file
 */
 
 #include "my_ls.h"
@@ -34,6 +34,7 @@ int nbr_of_flags(char **av, int count)
 char *ls_flags(char *av, char *my_flag)
 {
 	int i = 1;
+
 	while (av[i] != '\0') {
 		switch (av[i]) {
 			case 'l':
