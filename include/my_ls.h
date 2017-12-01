@@ -17,7 +17,6 @@
 	#include <stdlib.h>
 	#include "my.h"
 	#include "printf.h"
-	char *my_find_name(char *str);
 	void my_type_2(struct stat sb);
 	void my_type(struct stat sb);
 	char *my_time(char *mytime, struct stat sb);

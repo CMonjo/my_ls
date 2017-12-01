@@ -7,27 +7,8 @@
 
 #include "my_ls.h"
 
-char *my_find_name(char *str)
-{
-	char* tmp = malloc(sizeof(char) * my_strlen(str));
-	int i = 0;
-
-	if (tmp == NULL)
-		exit (84);
-	my_revstr(str);
-	while (str[i] != '/') {
-		tmp[i] = str[i];
-		i++;
-	}
-	my_revstr(tmp);
-	free(tmp);
-	return (tmp);
-}
-
 void which_flag(char **av, char *my_path, char *my_flag, int nbr_flags)
 {
-	//printf("mypath %s\n", my_path);
-	//printf("nbr flag %d\n", nbr_flags);
 	if (nbr_flags == 0) {
 		without_flag(my_path);
 	}
@@ -42,6 +23,7 @@ void which_flag(char **av, char *my_path, char *my_flag, int nbr_flags)
 	}
 }
 
+//FAIRE STRUCT
 int calculate_path(int ac, char **av, char *my_flag)
 {
 	char *my_path = malloc(sizeof(char) * ac * 3);
