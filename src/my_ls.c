@@ -61,12 +61,12 @@ int calculate_flags(int ac, char **av)
 	my_flag[1] = '0';
 	my_flag[2] = '0';
 	my_flag[3] = '0';
-	while (av[i] != '\0') {
+	while ((*av[i]) != '\0') {
 		if (av[i][0] == '-')
 			my_flag = ls_flags(av[i], my_flag);
 		i++;
 	}
-	//my_printf("FLAGS l | r | R | a == %s\n", my_flag);
+	my_printf("FLAGS l | r | R | a == %s\n", my_flag);
 	calculate_path(ac, av, my_flag);
 	return (0);
 }

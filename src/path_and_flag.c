@@ -34,7 +34,6 @@ int nbr_of_flags(char **av, int count)
 char *ls_flags(char *av, char *my_flag)
 {
 	int i = 1;
-
 	while (av[i] != '\0') {
 		switch (av[i]) {
 			case 'l':
@@ -52,6 +51,7 @@ char *ls_flags(char *av, char *my_flag)
 		}
 		i++;
 	}
+	printf("debug\n" );
 	return (my_flag);
 }
 
