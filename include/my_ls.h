@@ -26,7 +26,7 @@
 	char *paths(char **av, int *count);
 	void which_flag(char *my_path, char *my_flag, int nbr_flags);
 	int without_flag(char *my_path);
-	int flag_r(char *my_path);
+	int flag_R(char *my_path);
 	int flag_a(char *my_path);
 	int flag_l(char *my_path);
 	void my_right(struct stat sb, char *mytime);

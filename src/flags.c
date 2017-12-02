@@ -17,7 +17,7 @@ int without_flag(char *my_path)
 		return (84);
 	while ((file = readdir(dir)) != NULL) {
 		if (file->d_name[0] != '.')
-			printf("%s\n", file->d_name);
+			my_printf("%s\n", file->d_name);
 	}
 	closedir(dir);
 	return (0);
@@ -32,7 +32,7 @@ int flag_a(char *my_path)
 	if (dir == NULL)
 		return (84);
 	while ((file = readdir(dir)) != NULL)
-		printf("%s\n", file->d_name);
+		my_printf("%s\n", file->d_name);
 	closedir(dir);
 	return (0);
 }
@@ -47,19 +47,19 @@ int flag_l(char *my_path)
 	dir = opendir(my_path);
 	if (mytime == NULL || dir == NULL)
 		return (84);
-	//printf("total %d\n", sb.st_blksize * 2);
+	my_printf("total %d\n", sb.st_blksize / 2);
 	while ((file = readdir(dir)) != NULL) {
 		if (file->d_name[0] != '.') {
 			stat(file->d_name, &sb);
 			my_right(sb, mytime);
-			printf(" %s\n", file->d_name);
+			my_printf(" %s\n", file->d_name);
 		}
 	}
 	closedir(dir);
 	return (0);
 }
 
-int flag_r(char *my_path)
+int flag_R(char *my_path)
 {
 	DIR *dir = NULL;
 	struct dirent *file = NULL;
@@ -68,7 +68,8 @@ int flag_r(char *my_path)
 	if (dir == NULL)
 		return (84);
 	while ((file = readdir(dir)) != NULL) {
-		printf("%s\n", file->d_name);
+		if (file->d_name[0] != '.')
+			my_printf("%s\n", file->d_name);
 	}
 	closedir(dir);
 	return (0);

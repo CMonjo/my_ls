@@ -51,7 +51,6 @@ char *ls_flags(char *av, char *my_flag)
 		}
 		i++;
 	}
-	printf("debug\n" );
 	return (my_flag);
 }
 

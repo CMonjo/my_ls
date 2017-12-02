@@ -11,16 +11,6 @@
 
 int my_specifiers(char *str, int *i, va_list list, int *count)
 {
-	if (str[(*i) + 1] == 'h') {
-		(*i)++;
-		if (str[(*i) + 1] == 'h') {
-			(*i)++;
-			specifier_hh(str, i, list, count);
-			return (0);
-		}
-		specifier_h(str, i, list, count);
-		return (0);
-	}
 	if (str[(*i) + 1] == 'l') {
 		(*i)++;
 		if (str[(*i) + 1] == 'l') {

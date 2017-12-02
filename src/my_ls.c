@@ -17,12 +17,11 @@ void which_flag(char *my_path, char *my_flag, int nbr_flags)
 	else if (my_flag[0] == '1' && my_flag[1] == '0' && my_flag[2] == '0' &&
 	my_flag[3] == '0')
 		flag_l(my_path);
-	else if (my_flag[0] == '0' && my_flag[1] == '1' && my_flag[2] == '0' &&
+	else if (my_flag[0] == '0' && my_flag[1] == '0' && my_flag[2] == '1' &&
 	my_flag[3] == '0')
-		flag_r(my_path);
+		flag_R(my_path);
 }
 
-//FAIRE STRUCT
 int calculate_path(int ac, char **av, char *my_flag)
 {
 	char *my_path = malloc(sizeof(char) * ac * 3);
@@ -41,10 +40,11 @@ int calculate_path(int ac, char **av, char *my_flag)
 		which_flag(".", my_flag, nbr_flags);
 	while (nbr_path > 0) {
 		my_path = paths(av, &count);
-		//!/AJOUTER UN \N ENTRE DEUX PATH S'IL Y A /!/
 		if (key > 1)
-			printf("%s:\n", my_path);
+			my_printf("%s:\n", my_path);
 		which_flag(my_path, my_flag, nbr_flags);
+		if (nbr_path > 1)
+			my_printf("\n");
 		nbr_path--;
 	}
 	return (0);
@@ -66,7 +66,6 @@ int calculate_flags(int ac, char **av)
 			my_flag = ls_flags(av[i], my_flag);
 		i++;
 	}
-	//printf("FLAGS l | r | R | a == %s\n", my_flag);
 	calculate_path(ac, av, my_flag);
 	free(my_flag);
 	return (0);
