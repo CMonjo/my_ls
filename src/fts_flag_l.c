@@ -11,16 +11,16 @@ void my_type_of_file_second(struct stat sb)
 {
 	switch (sb.st_mode & S_IFMT) {
 		case S_IFIFO:
-			my_printf("p");
+			printf("p");
 			break;
 		case S_IFLNK:
-			my_printf("l");
+			printf("l");
 			break;
 		case S_IFREG:
-			my_printf("-");
+			printf("-");
 			break;
 		case S_IFSOCK:
-			my_printf("s");
+			printf("s");
 			break;
 	}
 }
@@ -29,13 +29,13 @@ void my_type_of_file(struct stat sb)
 {
 	switch (sb.st_mode & S_IFMT) {
 		case S_IFBLK:
-			my_printf("b");
+			printf("b");
 			break;
 		case S_IFCHR:
-			my_printf("c");
+			printf("c");
 			break;
 		case S_IFDIR:
-			my_printf("d");
+			printf("d");
 			break;
 	}
 	my_type_of_file_second(sb);
@@ -68,18 +68,18 @@ void my_right(struct stat sb, char *mytime)
 	name = getpwuid(sb.st_uid);
 	group = getgrgid(sb.st_gid);
 	my_type_of_file(sb);
-	my_printf((sb.st_mode & S_IRUSR) ? "r" : "-");
-	my_printf((sb.st_mode & S_IWUSR) ? "w" : "-");
-	my_printf((sb.st_mode & S_IXUSR) ? "x" : "-");
-	my_printf((sb.st_mode & S_IRGRP) ? "r" : "-");
-	my_printf((sb.st_mode & S_IWGRP) ? "w" : "-");
-	my_printf((sb.st_mode & S_IXGRP) ? "x" : "-");
-	my_printf((sb.st_mode & S_IROTH) ? "r" : "-");
-	my_printf((sb.st_mode & S_IWOTH) ? "w" : "-");
-	my_printf((sb.st_mode & S_IXOTH) ? "x" : "-");
-	my_printf(" %d", (int)sb.st_nlink);
-	my_printf(" %s", name->pw_name);
-	my_printf(" %s", group->gr_name);
-	my_printf(" %lld", sb.st_size);
-	my_printf(" %s", my_time(mytime, sb));
+	printf((sb.st_mode & S_IRUSR) ? "r" : "-");
+	printf((sb.st_mode & S_IWUSR) ? "w" : "-");
+	printf((sb.st_mode & S_IXUSR) ? "x" : "-");
+	printf((sb.st_mode & S_IRGRP) ? "r" : "-");
+	printf((sb.st_mode & S_IWGRP) ? "w" : "-");
+	printf((sb.st_mode & S_IXGRP) ? "x" : "-");
+	printf((sb.st_mode & S_IROTH) ? "r" : "-");
+	printf((sb.st_mode & S_IWOTH) ? "w" : "-");
+	printf((sb.st_mode & S_IXOTH) ? "x" : "-");
+	printf(" %d", (int)sb.st_nlink);
+	printf(" %s", name->pw_name);
+	printf(" %s", group->gr_name);
+	//printf(" %lld", sb.st_size);
+	printf(" %s", my_time(mytime, sb));
 }

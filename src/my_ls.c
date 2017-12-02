@@ -43,7 +43,7 @@ int calculate_path(int ac, char **av, char *my_flag)
 		my_path = paths(av, &count);
 		//!/AJOUTER UN \N ENTRE DEUX PATH S'IL Y A /!/
 		if (key > 1)
-			my_printf("%s:\n", my_path);
+			printf("%s:\n", my_path);
 		which_flag(my_path, my_flag, nbr_flags);
 		nbr_path--;
 	}
@@ -52,7 +52,7 @@ int calculate_path(int ac, char **av, char *my_flag)
 
 int calculate_flags(int ac, char **av)
 {
-	char *my_flag = malloc(sizeof(char) * 5);
+	char *my_flag = malloc(sizeof(char *) * 100);
 	int i = 0;
 
 	if (my_flag == NULL)
@@ -61,13 +61,14 @@ int calculate_flags(int ac, char **av)
 	my_flag[1] = '0';
 	my_flag[2] = '0';
 	my_flag[3] = '0';
-	while ((*av[i]) != '\0') {
+	while (av[i]) {
 		if (av[i][0] == '-')
 			my_flag = ls_flags(av[i], my_flag);
 		i++;
 	}
-	my_printf("FLAGS l | r | R | a == %s\n", my_flag);
+	//printf("FLAGS l | r | R | a == %s\n", my_flag);
 	calculate_path(ac, av, my_flag);
+	free(my_flag);
 	return (0);
 }
 
