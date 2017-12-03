@@ -43,20 +43,19 @@ void my_type_of_file(struct stat sb)
 
 char *my_time(char *mytime, struct stat sb)
 {
-	mytime[0] = ctime(&sb.st_mtime)[4] + 32;
+	mytime[0] = ctime(&sb.st_mtime)[4];
 	mytime[1] = ctime(&sb.st_mtime)[5];
 	mytime[2] = ctime(&sb.st_mtime)[6];
-	mytime[3] = '.';
-	mytime[4] = ' ';
-	mytime[5] = ctime(&sb.st_mtime)[8];
-	mytime[6] = ctime(&sb.st_mtime)[9];
-	mytime[7] = ' ';
-	mytime[8] = ctime(&sb.st_mtime)[11];
-	mytime[9] = ctime(&sb.st_mtime)[12];
-	mytime[10] = ':';
-	mytime[11] = ctime(&sb.st_mtime)[14];
-	mytime[12] = ctime(&sb.st_mtime)[15];
-	mytime[13] = '\0';
+	mytime[3] = ' ';
+	mytime[4] = ctime(&sb.st_mtime)[8];
+	mytime[5] = ctime(&sb.st_mtime)[9];
+	mytime[6] = ' ';
+	mytime[7] = ctime(&sb.st_mtime)[11];
+	mytime[8] = ctime(&sb.st_mtime)[12];
+	mytime[9] = ':';
+	mytime[10] = ctime(&sb.st_mtime)[14];
+	mytime[11] = ctime(&sb.st_mtime)[15];
+	mytime[12] = '\0';
 	return (mytime);
 }
 

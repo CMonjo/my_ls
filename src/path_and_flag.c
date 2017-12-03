@@ -54,7 +54,7 @@ char *ls_flags(char *av, char *my_flag)
 	return (my_flag);
 }
 
-char *paths(char **av, int *count)
+char *which_paths(char **av, int *count)
 {
 	char *path = " ";
 

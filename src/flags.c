@@ -42,15 +42,16 @@ int flag_l(char *my_path)
 	DIR *dir = NULL;
 	struct dirent *file = NULL;
 	struct stat sb;
-	char *mytime = malloc(sizeof(char) * 14);
+	struct stat res_stat;
+	char *mytime = malloc(sizeof(char) * 13);
 
 	dir = opendir(my_path);
 	if (mytime == NULL || dir == NULL)
 		return (84);
-	my_printf("total %d\n", sb.st_blksize / 2);
+	my_printf("total %lld\n", res_stat.st_blocks / 2888000000000);
 	while ((file = readdir(dir)) != NULL) {
 		if (file->d_name[0] != '.') {
-			stat(file->d_name, &sb);
+			lstat(file->d_name, &sb);
 			my_right(sb, mytime);
 			my_printf(" %s\n", file->d_name);
 		}

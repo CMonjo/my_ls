@@ -7,22 +7,24 @@
 
 #include "my_ls.h"
 
-void which_flag(char *my_path, char *my_flag, int nbr_flags)
+void which_flag_exception(char *my_path, int nbr_flags, int nbr_path)
 {
 	if (nbr_flags == 0)
 		without_flag(my_path);
-	if (my_flag[0] == '0' && my_flag[1] == '0' && my_flag[2] == '0' &&
-	my_flag[3] == '1')
-		flag_a(my_path);
-	else if (my_flag[0] == '1' && my_flag[1] == '0' && my_flag[2] == '0' &&
-	my_flag[3] == '0')
-		flag_l(my_path);
-	else if (my_flag[0] == '0' && my_flag[1] == '0' && my_flag[2] == '1' &&
-	my_flag[3] == '0')
-		flag_R(my_path);
+	if (nbr_path > 1)
+		my_printf("\n");
 }
 
-int calculate_path(int ac, char **av, char *my_flag)
+void which_flag(char *my_path, char *my_flag, int nbr_flags, int nbr_path)
+{
+	if (my_flag[3] == '1')
+		flag_a(my_path);
+	else if (my_flag[0] == '1')
+		flag_l(my_path);
+	which_flag_exception(my_path, nbr_flags, nbr_path);
+}
+
+void calculate_path(int ac, char **av, char *my_flag)
 {
 	char *my_path = malloc(sizeof(char) * ac * 3);
 	int nbr_path = 0;
@@ -31,23 +33,18 @@ int calculate_path(int ac, char **av, char *my_flag)
 	int count_flags = 0;
 	int key = 0;
 
-	if (my_path == NULL)
-		return (84);
 	nbr_path = nbr_of_path(av, nbr_path);
 	nbr_flags = nbr_of_flags(av, count_flags);
 	key = nbr_path;
 	if (nbr_path == 0)
-		which_flag(".", my_flag, nbr_flags);
+		which_flag(".", my_flag, nbr_flags, nbr_path);
 	while (nbr_path > 0) {
-		my_path = paths(av, &count);
+		my_path = which_paths(av, &count);
 		if (key > 1)
 			my_printf("%s:\n", my_path);
-		which_flag(my_path, my_flag, nbr_flags);
-		if (nbr_path > 1)
-			my_printf("\n");
+		which_flag(my_path, my_flag, nbr_flags, nbr_path);
 		nbr_path--;
 	}
-	return (0);
 }
 
 int calculate_flags(int ac, char **av)
