@@ -23,7 +23,7 @@ int without_flag(char *my_path)
 	return (0);
 }
 
-int flag_a(char *my_path)
+int flag_my_ls_a(char *my_path)
 {
 	DIR *dir = NULL;
 	struct dirent *file = NULL;
@@ -37,7 +37,7 @@ int flag_a(char *my_path)
 	return (0);
 }
 
-int flag_l(char *my_path)
+int flag_my_ls_l(char *my_path)
 {
 	DIR *dir = NULL;
 	struct dirent *file = NULL;
@@ -58,7 +58,7 @@ int flag_l(char *my_path)
 	return (0);
 }
 
-int flag_R(char *my_path)
+int flag_my_ls_R(char *my_path)
 {
 	DIR *dir = NULL;
 	struct dirent *file = NULL;

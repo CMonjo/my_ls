@@ -31,7 +31,7 @@ int nbr_of_flags(char **av, int count)
 	return (count);
 }
 
-char *ls_flags(char *av, char *my_flag)
+char *flags_for_my_ls(char *av, char *my_flag)
 {
 	int i = 1;
 	while (av[i] != '\0') {

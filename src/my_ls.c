@@ -18,9 +18,9 @@ void which_flag_exception(char *my_path, int nbr_flags, int nbr_path)
 void which_flag(char *my_path, char *my_flag, int nbr_flags, int nbr_path)
 {
 	if (my_flag[3] == '1')
-		flag_a(my_path);
+		flag_my_ls_a(my_path);
 	else if (my_flag[0] == '1')
-		flag_l(my_path);
+		flag_my_ls_l(my_path);
 	which_flag_exception(my_path, nbr_flags, nbr_path);
 }
 
@@ -60,7 +60,7 @@ int calculate_flags(int ac, char **av)
 	my_flag[3] = '0';
 	while (av[i]) {
 		if (av[i][0] == '-')
-			my_flag = ls_flags(av[i], my_flag);
+			my_flag = flags_for_my_ls(av[i], my_flag);
 		i++;
 	}
 	calculate_path(ac, av, my_flag);
