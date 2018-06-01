@@ -18,9 +18,5 @@ Navigate to the root of the repository from your Terminal and run make to build 
 
 ## Author
 
-* Nicolas ALBIGES
-* Hugo CODINACH
-* Clément CHAPTAL
-* Raphaël DAKICHE
 * Camille MONJO
 * Mail adress : camille@cmonjo.com
